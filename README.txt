@@ -22,6 +22,7 @@ Credits:
 	
 	Other:
 		jQuery (jquery.com)
-
+		HTML5 Template
 		Responsive Tools (github.com/ajlkn/responsive-tools)
+
 
