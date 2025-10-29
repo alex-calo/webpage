@@ -8,24 +8,20 @@ and a cool depth effect (click on a menu item to see what I mean). Simple, fully
 responsive, and kitted out with all the usual pre-styled elements you'd expect.
 Hope you dig it :)
 
-Demo images* courtesy of Unsplash, a radtastic collection of CC0 (public domain) images
-you can use for pretty much whatever.
-
-(* = not included)
-
-AJ
-aj@lkn.io | @ajlkn
+Images* protected by copywright.
 
 
 Credits:
 
-	Demo Images:
-		Unsplash (unsplash.com)
-
 	Icons:
 		Font Awesome (fontawesome.io)
 
+	Template:
+		AJ
+		aj@lkn.io | @ajlkn
+	
 	Other:
 		jQuery (jquery.com)
 
 		Responsive Tools (github.com/ajlkn/responsive-tools)
+
