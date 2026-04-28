@@ -636,6 +636,15 @@ function navigateTo(url) {
   if (stage) stage.classList.add('page-exit');
   setTimeout(() => { window.location.href = url; }, 360);
 }
+
+/* ── BFCACHE RESTORE: re-run startup sequence on browser back ── */
+window.addEventListener('pageshow', e => {
+  document.querySelectorAll('.page-exit, .page-exit-left, .page-exit-right').forEach(el => {
+    el.classList.remove('page-exit', 'page-exit-left', 'page-exit-right');
+  });
+  if (e.persisted) window.location.reload();
+});  
+  
 </script>
 </body>
 </html>
