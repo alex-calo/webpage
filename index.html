@@ -82,6 +82,12 @@
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     pointer-events: none;
+    opacity: 0;
+    animation: marqueeFadeIn 1.1s .55s ease-out forwards;
+  }
+  @keyframes marqueeFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
   .marquee-track {
     display: flex; width: max-content;
@@ -276,6 +282,24 @@
     #wrapper { padding-bottom: 80px; }
     .nav-primary, .nav-secondary { display: none; }
     .cta-btn { display: none; }
+    .panel-close { display: none; }
+  }
+
+  /* ── COPYRIGHT ── */
+  .copyright {
+    position: fixed; bottom: 14px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .46rem; letter-spacing: .18em;
+    color: rgba(107,107,107,.55);
+    z-index: 4; pointer-events: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .copyright {
+      bottom: 66px;
+      font-size: .4rem; letter-spacing: .14em;
+    }
   }
 
   /* ── PAGE TRANSITIONS ── */
@@ -535,6 +559,9 @@
   </header>
 
 </div>
+
+<!-- Copyright -->
+<div class="copyright" aria-label="Copyright">© 2026 Alex Calò · All rights reserved</div>
 
 <!-- Mobile bottom nav -->
 <nav class="mobile-nav" aria-label="Mobile navigation">

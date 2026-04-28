@@ -112,6 +112,19 @@
     margin: 40px auto 0;
     opacity: 0; animation: fadeUp .8s 1s forwards;
   }
+  .scroll-hint {
+    margin-top: 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: .5rem; letter-spacing: .28em; text-transform: uppercase;
+    color: rgba(107,107,107,.7);
+    display: inline-flex; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp .7s 1.25s forwards, scrollPulse 2.4s 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .55; }
+  }
 
   /* ─── SECTION BASE ─── */
   section {
@@ -413,7 +426,9 @@
     animation: slide 38s linear infinite;
     will-change: transform;
   }
-  .carousel-track:hover { animation-play-state: paused; }
+  @media (hover: hover) {
+    .carousel-track:hover { animation-play-state: paused; }
+  }
 
   @keyframes slide {
     from { transform: translateX(0); }
@@ -498,6 +513,24 @@
     font-size: .78rem; color: var(--ash);
     letter-spacing: .12em; text-align: center;
   }
+  
+    /* ── COPYRIGHT ── */
+  .copyright {
+    position: fixed; bottom: 14px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .46rem; letter-spacing: .18em;
+    color: rgba(107,107,107,.55);
+    z-index: 4; pointer-events: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .copyright {
+      bottom: 66px;
+      font-size: .4rem; letter-spacing: .14em;
+    }
+  }
+  
   /* ── MOBILE BOTTOM NAV ── */
   .mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; z-index:100; background:rgba(8,8,8,.96); backdrop-filter:blur(16px); border-top:1px solid rgba(200,184,154,.12); height:62px; }
   .mobile-nav-inner { display:flex; height:100%; }
@@ -509,6 +542,7 @@
     .mobile-nav { display:block; }
     #stage { padding-bottom:80px; }
     .app-grid { gap:24px; }
+    footer { padding: 48px 24px 96px; }
   }
   /* ─── ANIMATIONS ─── */
   @keyframes fadeUp {
@@ -556,6 +590,7 @@
     <h1>Media<em>Dev</em></h1>
     <p class="hero-sub">Concept Albums · Documentary Sound · Location Photography</p>
     <div class="hero-line"></div>
+    <span class="scroll-hint" aria-hidden="true">scroll down</span>
   </div>
 </section>
 
@@ -755,7 +790,8 @@
      FOOTER
 ═══════════════════════════════════════ -->
 <footer id="contact">
-  <p class="footer-copy">© 2026 Alex Calò · All rights reserved</p>
+  <!-- Copyright -->
+<div class="copyright" aria-label="Copyright">© 2026 Alex Calò · All rights reserved</div>
 </footer>
 
 <!-- Mobile nav -->

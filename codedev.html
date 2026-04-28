@@ -55,6 +55,12 @@
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     pointer-events: none;
+    opacity: 0;
+    animation: marqueeFadeIn 1.1s .55s ease-out forwards;
+  }
+  @keyframes marqueeFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
   }
   .marquee-track {
     display: flex; width: max-content;
@@ -180,10 +186,15 @@
     margin-top:40px; font-family:'Space Mono',monospace;
     font-size:.5rem; letter-spacing:.28em; text-transform:uppercase;
     color:rgba(107,107,107,.7);
-    display:flex; align-items:center; gap:10px;
-    opacity:0; animation:fadeUp .6s 1s forwards;
+    display:flex; align-items:center; gap:12px;
+    opacity:0; animation:fadeUp .6s 1s forwards, scrollPulse 2.4s 2s ease-in-out infinite;
   }
   .tap-hint::before,.tap-hint::after { content:''; flex:1; height:1px; background:rgba(200,184,154,.1); }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: .55; }
+  }
 
   /* ── SOCIAL — FIXED BOTTOM RIGHT ── */
   .social-fixed { position:fixed; right:22px; bottom:38px; z-index:10; display:flex; flex-direction:column; gap:7px; }
@@ -218,12 +229,13 @@
   }
 
   .modal-close {
-    position:absolute; top:12px; right:16px;
+    position:absolute; top:12px; right:16px; z-index:5;
     display:flex; align-items:center; justify-content:center;
     width:48px; height:48px;
     background:rgba(200,184,154,.06); border:1px solid rgba(200,184,154,.13);
     color:var(--ash); cursor:crosshair; font-size:.7rem;
     transition:color .2s,border-color .2s; -webkit-tap-highlight-color:transparent;
+    touch-action: manipulation;
   }
   .modal-close:hover { color:var(--accent); border-color:rgba(200,184,154,.35); }
 
@@ -310,6 +322,23 @@
     .mobile-nav { display:block; }
     #stage { padding-bottom:80px; }
     .app-grid { gap:24px; }
+  }
+
+  /* ── COPYRIGHT ── */
+  .copyright {
+    position: fixed; bottom: 14px; left: 0; right: 0;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: .46rem; letter-spacing: .18em;
+    color: rgba(107,107,107,.55);
+    z-index: 4; pointer-events: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .copyright {
+      bottom: 66px;
+      font-size: .4rem; letter-spacing: .14em;
+    }
   }
 
   /* ── KEYFRAMES ── */
@@ -448,6 +477,9 @@
   </div>
 </div>
 
+<!-- Copyright -->
+<div class="copyright" aria-label="Copyright">© 2026 Alex Calò · All rights reserved</div>
+
 <!-- Mobile nav -->
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <div class="mobile-nav-inner">
@@ -579,6 +611,13 @@ function closeModal(silent){
   current=null;
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* Bind close buttons explicitly so taps fire reliably on mobile */
+document.querySelectorAll('.modal-close').forEach(btn=>{
+  const handler=e=>{ e.preventDefault(); e.stopPropagation(); closeModal(); };
+  btn.addEventListener('click',handler);
+  btn.addEventListener('touchend',handler,{passive:false});
+});
 
 /* swipe down to close */
 let ty=0;
