@@ -712,6 +712,14 @@ function navigateTo(url, direction) {
   setTimeout(() => { window.location.href = url; }, 380);
 }
 
+/* ── BFCACHE RESTORE: re-run startup sequence on browser back ── */
+window.addEventListener('pageshow', e => {
+  document.querySelectorAll('.page-exit, .page-exit-left, .page-exit-right').forEach(el => {
+    el.classList.remove('page-exit', 'page-exit-left', 'page-exit-right');
+  });
+  if (e.persisted) window.location.reload();
+});
+	
 /* ── TAGLINE TYPEWRITER ── */
 (function() {
   const el = document.getElementById('tagline');
